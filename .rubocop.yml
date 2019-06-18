@@ -1,0 +1,50 @@
+require: rubocop-performance
+
+AllCops:
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+    - 'lib/**/*.rb'
+    - 'spec/**/*.rb'
+  Exclude:
+    - 'bin/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - !ruby/regexp /old_and_unused\.rb$/
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - spec/**/*
+
+Style/SignalException:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: aligned
+
+Metrics/AbcSize:
+  Max: 16.5
+
+# helps for methods that return more complex hashes or use log statements
+Metrics/MethodLength:
+  Max: 15
+
+# We need multiline lambdas with `->` for scope declarations
+Style/Lambda:
+  Enabled: false
+
+# Since it's useful in certain situations and not in most, we can catch those during review
+Style/RescueModifier:
+  Enabled: false
+
+# Sometimes, german umlauts can be useful. Also: UTF-8, bitches!
+Style/AsciiComments:
+  Enabled: false
