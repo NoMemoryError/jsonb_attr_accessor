@@ -13,6 +13,10 @@ module JsonbAttrAccessor
           define_method(method_name) do
             read_attribute(jsonb_column_name)[method_name.to_s]
           end
+
+          scope "by_#{method_name}", ->(value) do
+            where("(settings->>'#{method_name}') = ?", value)
+          end
         end
       end
     end
